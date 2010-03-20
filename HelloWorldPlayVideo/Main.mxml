@@ -3,32 +3,35 @@
 	backgroundColor="0xffffff" 
 	creationComplete="init();">
 <mx:Script>
-<![CDATA[
+<![CDATA[               
+
+	 // Compatible with OSMF 0.93
+
 		import org.osmf.containers.*;
-        import org.osmf.elements.*;
-        import org.osmf.net.*;
-        import org.osmf.media.*;
-        import org.osmf.events.*;
-              
-        public var container:MediaContainer = new MediaContainer();
+    import org.osmf.elements.*;
+    import org.osmf.net.*;
+    import org.osmf.media.*;
+    import org.osmf.events.*;
+      
+    public var container:MediaContainer = new MediaContainer();
 		public var mediaPlayer:MediaPlayer = new MediaPlayer(); 
-       
-        public function init():void {
+   
+    public function init():void {
 	
-            var myURL:String = new String("demo-video.flv");                           
+      var myURL:String = new String("demo-video.flv");             
 			var videoElement:VideoElement = new VideoElement( new URLResource(myURL), new NetLoader());
 
-            container.addMediaElement(videoElement);               
-            myUIComp.addChild(container);
-           
-			mediaPlayer.media = videoElement;       
-            mediaPlayer.addEventListener(MediaPlayerStateChangeEvent.MEDIA_PLAYER_STATE_CHANGE, onStateChange);			
-        }
+      container.addMediaElement(videoElement);       
+      myUIComp.addChild(container);
+     
+			mediaPlayer.media = videoElement;   
+       mediaPlayer.addEventListener(MediaPlayerStateChangeEvent.MEDIA_PLAYER_STATE_CHANGE, onStateChange);			
+    }
 
-        private function onStateChange(event:MediaPlayerStateChangeEvent):void {
-            debugTxt.text += "State Change: " + event.state + "\n";
-        }
-                       
+    private function onStateChange(event:MediaPlayerStateChangeEvent):void {
+      debugTxt.text += "State Change: " + event.state + "\n";
+    }
+           
 ]]>
 </mx:Script>
 
