@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"
+	backgroundColor="0xffffff" 
+	creationComplete="init();">
+<mx:Script>
+<![CDATA[
+		import org.osmf.containers.*;
+        import org.osmf.elements.*;
+        import org.osmf.net.*;
+        import org.osmf.media.*;
+        import org.osmf.events.*;
+              
+        public var container:MediaContainer = new MediaContainer();
+		public var mediaPlayer:MediaPlayer = new MediaPlayer(); 
+       
+        public function init():void {
+	
+            var myURL:String = new String("demo-video.flv");                           
+			var videoElement:VideoElement = new VideoElement( new URLResource(myURL), new NetLoader());
+
+            container.addMediaElement(videoElement);               
+            myUIComp.addChild(container);
+           
+			mediaPlayer.media = videoElement;       
+            mediaPlayer.addEventListener(MediaPlayerStateChangeEvent.MEDIA_PLAYER_STATE_CHANGE, onStateChange);			
+        }
+
+        private function onStateChange(event:MediaPlayerStateChangeEvent):void {
+            debugTxt.text += "State Change: " + event.state + "\n";
+        }
+                       
+]]>
+</mx:Script>
+
+
+<!-- UIComponent for container-->
+	<mx:UIComponent id="myUIComp" width="320" height="240" />
+	
+	<!-- Buttons -->
+	<mx:HBox>
+		<mx:Button click="mediaPlayer.play()" label="play" />
+		<mx:Button click="mediaPlayer.pause()" label="pause" />
+	</mx:HBox>
+	
+	<!-- Debug Text -->
+	<mx:TextArea id="debugTxt" width="400" height="100" editable="false" />
+</mx:Application>
